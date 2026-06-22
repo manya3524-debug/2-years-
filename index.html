@@ -1,4 +1,5 @@
-    <!DOCTYPE html>
+    
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,304 +7,280 @@
 <title>Memory Museum</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Trebuchet MS', sans-serif;
 }
 
-body{
-min-height:100vh;
-background:linear-gradient(135deg,#ffe4ec,#fff7f0,#fce7f3);
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-overflow:hidden;
-color:#3d2f35;
+body {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #ffe6ee, #fff7f1, #ffeaf3);
+  overflow-x: hidden;
+  color: #5b3545;
 }
 
-.container{
-width:100%;
-max-width:760px;
-background:rgba(255,255,255,.92);
-border-radius:32px;
-padding:30px;
-box-shadow:0 20px 50px rgba(214,91,132,.18);
-position:relative;
-z-index:2;
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.screen{
-display:none;
-animation:fade .45s ease;
+.heart {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0.35;
+  animation: float 8s infinite ease-in-out;
 }
 
-.screen.active{
-display:block;
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(12deg); }
 }
 
-@keyframes fade{
-from{opacity:0;transform:translateY(12px);}
-to{opacity:1;transform:translateY(0);}
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding: 45px 18px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
 }
 
-h1,h2{
-text-align:center;
-margin-bottom:14px;
-color:#51313d;
+.screen.active {
+  display: block;
 }
 
-.subtitle{
-text-align:center;
-color:#8a5b6b;
-line-height:1.6;
-margin-bottom:28px;
+.museum-box, .memory-box {
+  background: rgba(255,255,255,0.9);
+  max-width: 430px;
+  margin: 70px auto 30px;
+  padding: 35px 25px;
+  border-radius: 32px;
+  box-shadow: 0 20px 45px rgba(255, 120, 160, 0.22);
 }
 
-.card-grid{
-display:grid;
-gap:16px;
+h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
 }
 
-.memory-card{
-background:#fff1f5;
-border:2px solid #ffd1dc;
-padding:22px;
-border-radius:24px;
-cursor:pointer;
-font-size:1.08rem;
-font-weight:700;
-transition:.25s;
-box-shadow:0 8px 20px rgba(255,143,171,.12);
+h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
 }
 
-.memory-card:hover{
-transform:translateY(-4px) scale(1.01);
-background:#ffe6ee;
+.intro {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #9b5d72;
+  margin-bottom: 25px;
 }
 
-.note{
-background:#fff6f8;
-padding:22px;
-border-radius:24px;
-line-height:1.8;
-color:#5b3f49;
-box-shadow:inset 0 0 0 1px #ffdce5;
+.teddy {
+  font-size: 70px;
+  margin: 10px 0;
+  animation: hug 2s infinite ease-in-out;
 }
 
-.note p{
-margin-bottom:15px;
+@keyframes hug {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08) rotate(-3deg); }
 }
 
-.photo{
-    width:75%;
-    max-height:320px;
-    object-fit:cover;
-    object-position:center;
-
-    display:block;
-    margin:20px auto;
-
-    background:white;
-    padding:12px 12px 45px 12px;
-
-    border-radius:8px;
-
-    box-shadow:
-    0 12px 30px rgba(0,0,0,0.15);
-
-    transform:rotate(-2deg);
-
-    transition:0.3s;
+.memory-card {
+  background: #fff0f6;
+  border: 3px solid #ffc5d7;
+  border-radius: 24px;
+  padding: 20px;
+  margin: 15px 0;
+  font-size: 21px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255, 150, 180, 0.18);
 }
 
-.photo:hover{
-    transform:rotate(0deg) scale(1.03);
-}
-button{
-margin-top:20px;
-padding:12px 24px;
-border:none;
-border-radius:999px;
-background:#ff8fab;
-color:white;
-cursor:pointer;
-font-size:1rem;
-font-weight:600;
-box-shadow:0 8px 18px rgba(255,143,171,.3);
+.memory-card:hover {
+  transform: scale(1.03);
 }
 
-button:hover{
-background:#ff7096;
-}
-.polaroid-caption{
-    text-align:center;
-    font-family:cursive;
-    color:#8a5b6b;
-    margin-top:-15px;
-    margin-bottom:25px;
-    font-size:1rem;
-}
-.heart{
-position:fixed;
-bottom:-30px;
-font-size:20px;
-opacity:.65;
-animation:floatUp 7s linear infinite;
-pointer-events:none;
-z-index:1;
-}
-  .polaroid{
-    position:relative;
-    width:fit-content;
-    margin:auto;
+.polaroid {
+  background: white;
+  padding: 14px 14px 25px;
+  border-radius: 18px;
+  max-width: 300px;
+  margin: 20px auto;
+  box-shadow: 0 15px 35px rgba(255, 105, 150, 0.25);
 }
 
-.polaroid::before{
-    content:"♡";
-    position:absolute;
-    top:-10px;
-    right:-10px;
-    font-size:22px;
+.photo {
+  width: 100%;
+  border-radius: 14px;
+  display: block;
 }
 
-.polaroid::after{
-    content:"✿";
-    position:absolute;
-    bottom:15px;
-    left:-10px;
-    font-size:20px;
+.polaroid-caption {
+  margin-top: 12px;
+  font-size: 17px;
+  color: #7a4b5b;
 }
 
-@keyframes floatUp{
-from{transform:translateY(0) rotate(0deg);opacity:0;}
-15%{opacity:.75;}
-to{transform:translateY(-110vh) rotate(360deg);opacity:0;}
+.note {
+  background: #fff7fa;
+  border: 2px dashed #ffb8cd;
+  padding: 24px;
+  border-radius: 28px;
+  max-width: 360px;
+  margin: 20px auto;
+  box-shadow: 0 12px 35px rgba(255, 120, 160, 0.15);
+}
+
+.note p {
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.teddy-note {
+  font-size: 54px;
+  margin-bottom: 8px;
+}
+
+button {
+  background: #ff7fa8;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 15px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 18px;
+  cursor: pointer;
+  box-shadow: 0 12px 25px rgba(255, 105, 150, 0.35);
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="hearts">
+  <span class="heart" style="top:8%; left:12%;">♡</span>
+  <span class="heart" style="top:20%; left:75%;">🩷</span>
+  <span class="heart" style="top:35%; left:25%;">♡</span>
+  <span class="heart" style="top:55%; left:80%;">🤍</span>
+  <span class="heart" style="top:75%; left:15%;">♡</span>
+  <span class="heart" style="top:85%; left:65%;">🩷</span>
+</div>
 
 <div id="home" class="screen active">
-<h1>♡ Memory Museum ♡</h1>
-<p class="subtitle">
-Some memories are too important to leave in storage.🧸
-<br>
-So I kept them here.
-</p>
+  <div class="museum-box">
+    <div class="teddy">🧸</div>
+    <h1>♡ Memory Museum ♡</h1>
+    <p class="intro">
+      Some memories are too important to leave in storage.<br>
+      So I kept them here, softly and safely.
+    </p>
 
-<div class="card-grid">
-<div class="memory-card" onclick="openMemory('safeplace')">🤍 My Safe Place</div>
-<div class="memory-card" onclick="openMemory('us in silence')">😂 us in silence</div>
-<div class="memory-card" onclick="openMemory('jamming-session')">🎶 the sound of Peace</div>
- <div class="memory-card" onclick="openMemory('tareefan ')">🤍 favorite compliment</div>
-</div>
-</div>
-
-<div id="safeplace" class="screen">
-<h2>🤍 My Safe Place</h2>
-
-<div class="polaroid">
-    <img src="IMG-20260621-WA0004.jpg" class="photo">
-    <p class="polaroid-caption">my safe place ♡</p>
-</div>
-<p>Some people never stop being important, no matter how much time passes or how many conversations are missed.</p>
-
-<p>You're one of those people for me.</p>
-
-<p>Through every laugh, every memory, every random conversation, and every little moment, you've somehow become a part of all of it.</p>
-
-<p>And whether I admit it or not, a part of me still looks for you in things I'd usually want to share.</p>
-
-<p>You're still one of my favorite people, idiot. 🤍</p>
+    <div class="memory-card" onclick="openMemory('safe-place')">🤍 My Safe Place</div>
+    <div class="memory-card" onclick="openMemory('us-silence')">😂 us in silence</div>
+    <div class="memory-card" onclick="openMemory('jamming-session')">🎶 the sound of peace</div>
+    <div class="memory-card" onclick="openMemory('tareefan')">🤍 favorite compliment</div>
+  </div>
 </div>
 
-<button onclick="goHome()">Back to Museum</button>
-</div>
+<div id="safe-place" class="screen">
+  <div class="memory-box">
+    <div class="teddy-note">🧸💌</div>
+    <h2>My Safe Place</h2>
 
-<div id="us in silence" class="screen">
-<h2>😂 us in silence</h2>
-    <div class="polaroid">
-    <img src="IMG-20260621-WA0014.jpg" class="photo">
-    <p class="polaroid-caption">us in silence ♡</p>
+    <div class="note">
+      <p>Some people never stop being important, no matter how much time passes or how many conversations are missed.</p>
+      <p>You’re one of those people for me, Abhinav.</p>
+      <p>Through every laugh, every memory, and every little moment, you’ve become a part of it, idiot.</p>
     </div>
-<div class="note">
-<p>Our meet late night tak jo meet hoti thi</p>
-<p>and fir sab chale jate the tab bhi hum rehte the maybe</p>
-<p>we started bonding more when we both use to talk gossip</p>
-<p>and use to share each and everything thankuu for being my safe place</p>
+
+    <button onclick="goHome()">Back to Museum</button>
+  </div>
 </div>
-<button onclick="goHome()">Back to Museum</button>
+
+<div id="us-silence" class="screen">
+  <div class="memory-box">
+    <h2>😂 us in silence</h2>
+
+    <div class="polaroid">
+      <img src="IMG-20260621-WA0014.jpg" class="photo">
+      <p class="polaroid-caption">us in silence ♡</p>
+    </div>
+
+    <div class="note">
+      <p>Our meet late night tak jo meet hoti thi</p>
+      <p>and fir sab chale jate the tab bhi hum rehte the maybe</p>
+      <p>we started bonding more when we both used to talk gossip</p>
+      <p>and used to share each and everything.</p>
+    </div>
+
+    <button onclick="goHome()">Back to Museum</button>
+  </div>
 </div>
 
 <div id="jamming-session" class="screen">
-<h2>❤️ jamming session </h2>
-<div class="polaroid">
-    <img src="IMG-20260621-WA0015.jpg" class="photo">
-    <p class="polaroid-caption">jamming session ♡</p>
-</div>
-<div class="note">
-<p>Our jamming session will be the bestttt thingg.</p>
-<p>the music us se humari vibe or match hone lagi</p>
-<p>and late night jamming session apka bolna .</p>
-<p>bread or maii bolti thi jam hheehhehe cutesttttt.</p>
-</div>
-    <button onclick="goHome()">Back to Museum</button>
-</div>
-    <div id="tareefan" class="screen">
-<h2>🤍 tareefan</h2>
+  <div class="memory-box">
+    <h2>❤️ jamming session</h2>
 
-<div class="polaroid">
-    <img src="IMG-20260621-WA0012.jpg" class="photo">
-    <p class="polaroid-caption">fav compliment ♡</p>
-</div>
-
-<div class="note">
-    <p>chall kr meri tareef ab to apne bande ko hi bol</p>
-    <p>rhi hu ahhhh keh rha apne bande se bol yaarr</p>
-    <p>ye sab convos ab kitni vesi lag rhi haiii fuckkk</p>
-    <p>😭😭🤌 cutee but</p>
-
-    <button onclick="goHome()">Back to Museum</button>
-</div>
+    <div class="polaroid">
+      <img src="IMG-20260621-WA0015.jpg" class="photo">
+      <p class="polaroid-caption">jamming session ♡</p>
     </div>
-    
+
+    <div class="note">
+      <p>Our jamming session will be the bestttt thingg.</p>
+      <p>the music us se humari vibe or match hone lagi</p>
+      <p>and late night jamming session apka bolna.</p>
+      <p>bread or maii bolti thi jam hheehhehe cutesttttt.</p>
+    </div>
+
+    <button onclick="goHome()">Back to Museum</button>
+  </div>
 </div>
 
+<div id="tareefan" class="screen">
+  <div class="memory-box">
+    <h2>🤍 tareefan</h2>
+
+    <div class="polaroid">
+      <img src="IMG-20260621-WA0012.jpg" class="photo">
+      <p class="polaroid-caption">fav compliment ♡</p>
+    </div>
+
+    <div class="note">
+      <p>chall kr meri tareef ab to apne bande ko hi bol</p>
+      <p>rhi hu ahhhh keh rha apne bande se bol yaarr</p>
+      <p>ye sab convos ab kitni vesi lag rhi haiii fuckk</p>
+      <p>😭😭🤌 cutee but</p>
+    </div>
+
+    <button onclick="goHome()">Back to Museum</button>
+  </div>
 </div>
 
 <script>
-function openMemory(id){
-document.querySelectorAll('.screen').forEach(screen=>{
-screen.classList.remove('active');
-});
-document.getElementById(id).classList.add('active');
+function openMemory(id) {
+  document.querySelectorAll('.screen').forEach(screen => {
+    screen.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
 }
 
-function goHome(){
-document.querySelectorAll('.screen').forEach(screen=>{
-screen.classList.remove('active');
-});
-document.getElementById('home').classList.add('active');
+function goHome() {
+  document.querySelectorAll('.screen').forEach(screen => {
+    screen.classList.remove('active');
+  });
+  document.getElementById('home').classList.add('active');
+  window.scrollTo(0, 0);
 }
-
-function createHeart(){
-const heart=document.createElement('div');
-heart.className='heart';
-heart.innerHTML=Math.random()>.5?'♡':'❤';
-heart.style.left=Math.random()*100+'vw';
-heart.style.fontSize=(16+Math.random()*18)+'px';
-heart.style.animationDuration=(5+Math.random()*4)+'s';
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),9000);
-}
-
-setInterval(createHeart,500);
 </script>
 
 </body>
