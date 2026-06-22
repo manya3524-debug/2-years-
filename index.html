@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Memory Museum</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #dbeafe, #fff1f2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: #2f2f3a;
+}
+
+.container {
+  width: 92%;
+  max-width: 540px;
+  min-height: 600px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 30px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+h2 {
+  margin-bottom: 18px;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.penguin {
+  font-size: 4rem;
+  margin-bottom: 10px;
+  animation: wiggle 1.5s infinite;
+}
+
+@keyframes wiggle {
+  0%,100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.card-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 25px;
+}
+
+.memory-card {
+  background: #fff7d6;
+  border: 2px solid #ffd166;
+  border-radius: 22px;
+  padding: 20px;
+  cursor: pointer;
+  transition: 0.25s;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.memory-card:hover {
+  transform: scale(1.04);
+  background: #ffeeb0;
+}
+
+.screen {
+  display: none;
+  animation: fade 0.45s ease;
+}
+
+.screen.active {
+  display: block;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+button {
+  border: none;
+  background: #6aa9ff;
+  color: white;
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background: #4d93ee;
+}
+
+.note {
+  background: #f8fbff;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.tiny {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  font-size: 20px;
+  opacity: 0.55;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 0; }
+  20% { opacity: 0.7; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div id="home" class="screen active">
+    <div class="penguin">🐧</div>
+    <h1>Memory Museum</h1>
+    <p>Welcome to a very serious museum made of tiny memories.</p>
+    <p class="tiny">No drama. Just things that mattered.</p>
+
+    <div class="card-grid">
+      <div class="memory-card" onclick="openMemory('first')">First Call ☎️</div>
+      <div class="memory-card" onclick="openMemory('funny')">Funniest Day 😂</div>
+      <div class="memory-card" onclick="openMemory('thanks')">Thank You ❤️</div>
+    </div>
+  </div>
+
+  <div id="first" class="screen">
+    <div class="penguin">🐧</div>
+    <h2>First Call ☎️</h2>
+    <div class="note">
+      <p>I don't remember everything we talked about.</p>
+      <p>I just remember not wanting the call to end.</p>
+      <p>And somehow, without even realizing it, you became someone I wanted to keep talking to.</p>
+    </div>
+    <button onclick="goHome()">Back to Museum</button>
+  </div>
+
+  <div id="funny" class="screen">
+    <div class="penguin">🐧</div>
+    <h2>Funniest Day 😂</h2>
+    <div class="note">
+      <p>There are so many stupid moments I could put here.</p>
+      <p>The rage baiting.</p>
+      <p>The random “God’s plan.”</p>
+      <p>The way you can ruin my mood and make me laugh in the same minute.</p>
+      <p>Very annoying. Very talented. Unfortunately unforgettable.</p>
+    </div>
+    <button onclick="goHome()">Back to Museum</button>
+  </div>
+
+  <div id="thanks" class="screen">
+    <div class="penguin">🐧</div>
+    <h2>Thank You ❤️</h2>
+    <div class="note">
+      <p>For every late-night call.</p>
+      <p>Every reality check.</p>
+      <p>Every time you stayed when it would have been easier not to.</p>
+      <p>Maybe I didn't always make it feel that way, but you mattered to me.</p>
+      <p>A lot.</p>
+    </div>
+    <button onclick="goHome()">Back to Museum</button>
+  </div>
+
+</div>
+
+<script>
+function openMemory(id) {
+  document.querySelectorAll(".screen").forEach(screen => {
+    screen.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+}
+
+function goHome() {
+  document.querySelectorAll(".screen").forEach(screen => {
+    screen.classList.remove("active");
+  });
+  document.getElementById("home").classList.add("active");
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "♡";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 7000);
+}
+
+setInterval(createHeart, 700);
+</script>
+
+</body>
+</html>
