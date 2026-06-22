@@ -1,155 +1,187 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Memory Museum</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
-body {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #dbeafe, #fff1f2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  color: #2f2f3a;
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#ffe4ec,#fff7f0,#fce7f3);
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+overflow:hidden;
+color:#3d2f35;
 }
 
-.container {
-  width: 92%;
-  max-width: 540px;
-  min-height: 600px;
-  background: rgba(255,255,255,0.92);
-  border-radius: 30px;
-  padding: 28px;
-  text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
-  position: relative;
-  overflow: hidden;
+.container{
+width:100%;
+max-width:760px;
+background:rgba(255,255,255,.92);
+border-radius:32px;
+padding:30px;
+box-shadow:0 20px 50px rgba(214,91,132,.18);
+position:relative;
+z-index:2;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 12px;
+.screen{
+display:none;
+animation:fade .45s ease;
 }
 
-h2 {
-  margin-bottom: 18px;
-}
-
-p {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  margin-bottom: 14px;
-}
-
-.penguin {
-  font-size: 4rem;
-  margin-bottom: 10px;
-  animation: wiggle 1.5s infinite;
-}
-
-@keyframes wiggle {
-  0%,100% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
-}
-
-.card-grid {
-  display: grid;
-  gap: 16px;
-  margin-top: 25px;
-}
-
-.memory-card {
-  background: #fff7d6;
-  border: 2px solid #ffd166;
-  border-radius: 22px;
-  padding: 20px;
-  cursor: pointer;
-  transition: 0.25s;
-  font-size: 1.15rem;
-  font-weight: bold;
-}
-
-.memory-card:hover {
-  transform: scale(1.04);
-  background: #ffeeb0;
-}
-
-.screen {
-  display: none;
-  animation: fade 0.45s ease;
-}
-
-.screen.active {
-  display: block;
-}
-
-@keyframes fade {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-button {
-  border: none;
-  background: #6aa9ff;
-  color: white;
-  padding: 13px 24px;
-  border-radius: 999px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-button:hover {
-  background: #4d93ee;
-}
-
-.note {
-  background: #f8fbff;
-  border-radius: 20px;
-  padding: 20px;
-  margin-top: 20px;
-}
-
-.tiny {
-  font-size: 0.9rem;
-  opacity: 0.7;
-}
-
-.heart {
-  position: fixed;
-  bottom: -30px;
-  font-size: 20px;
-  opacity: 0.55;
-  animation: floatUp 6s linear infinite;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 0; }
-  20% { opacity: 0.7; }
-  to { transform: translateY(-110vh); opacity: 0; }
-}
-  .photo{
-width:85%;
-max-height:320px;
-object-fit:cover;
-object-position:center;
-border-radius:15px;
-margin:0 auto 20px auto;
+.screen.active{
 display:block;
-padding:10px;
-background:white;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-  }
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(12px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+h1,h2{
+text-align:center;
+margin-bottom:14px;
+color:#51313d;
+}
+
+.subtitle{
+text-align:center;
+color:#8a5b6b;
+line-height:1.6;
+margin-bottom:28px;
+}
+
+.card-grid{
+display:grid;
+gap:16px;
+}
+
+.memory-card{
+background:#fff1f5;
+border:2px solid #ffd1dc;
+padding:22px;
+border-radius:24px;
+cursor:pointer;
+font-size:1.08rem;
+font-weight:700;
+transition:.25s;
+box-shadow:0 8px 20px rgba(255,143,171,.12);
+}
+
+.memory-card:hover{
+transform:translateY(-4px) scale(1.01);
+background:#ffe6ee;
+}
+
+.note{
+background:#fff6f8;
+padding:22px;
+border-radius:24px;
+line-height:1.8;
+color:#5b3f49;
+box-shadow:inset 0 0 0 1px #ffdce5;
+}
+
+.note p{
+margin-bottom:15px;
+}
+
+.photo{
+    width:75%;
+    max-height:320px;
+    object-fit:cover;
+    object-position:center;
+
+    display:block;
+    margin:20px auto;
+
+    background:white;
+    padding:12px 12px 45px 12px;
+
+    border-radius:8px;
+
+    box-shadow:
+    0 12px 30px rgba(0,0,0,0.15);
+
+    transform:rotate(-2deg);
+
+    transition:0.3s;
+}
+
+.photo:hover{
+    transform:rotate(0deg) scale(1.03);
+}
+button{
+margin-top:20px;
+padding:12px 24px;
+border:none;
+border-radius:999px;
+background:#ff8fab;
+color:white;
+cursor:pointer;
+font-size:1rem;
+font-weight:600;
+box-shadow:0 8px 18px rgba(255,143,171,.3);
+}
+
+button:hover{
+background:#ff7096;
+}
+.polaroid-caption{
+    text-align:center;
+    font-family:cursive;
+    color:#8a5b6b;
+    margin-top:-15px;
+    margin-bottom:25px;
+    font-size:1rem;
+}
+.heart{
+position:fixed;
+bottom:-30px;
+font-size:20px;
+opacity:.65;
+animation:floatUp 7s linear infinite;
+pointer-events:none;
+z-index:1;
+}
+  .polaroid{
+    position:relative;
+    width:fit-content;
+    margin:auto;
+}
+
+.polaroid::before{
+    content:"♡";
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    font-size:22px;
+}
+
+.polaroid::after{
+    content:"✿";
+    position:absolute;
+    bottom:15px;
+    left:-10px;
+    font-size:20px;
+}
+
+@keyframes floatUp{
+from{transform:translateY(0) rotate(0deg);opacity:0;}
+15%{opacity:.75;}
+to{transform:translateY(-110vh) rotate(360deg);opacity:0;}
+}
 </style>
 </head>
 
@@ -157,114 +189,105 @@ box-shadow:0 10px 25px rgba(0,0,0,.15);
 
 <div class="container">
 
-  <div id="home" class="screen active">
-    <div class="penguin">🐧</div>
-    <h1>Memory Museum</h1>
-    <p>Welcome to a very serious museum made of tiny memories.</p>
-    <p class="tiny">No drama. Just things that mattered.</p>
+<div id="home" class="screen active">
+<h1>♡ Memory Museum ♡</h1>
+<p class="subtitle">
+Some memories are too important to leave in storage.
+<br>
+So I kept them here.
+</p>
 
-    <div class="card-grid">
-      <div class="memory-card" onclick="openMemory('safe')">safe space ☎️</div>
-      <div class="memory-card" onclick="openMemory('funny')">Funniest Day 😂</div>
-      <div class="memory-card" onclick="openMemory('thanks')">Thank You ❤️</div>
-    </div>
-  </div>
+<div class="card-grid">
+<div class="memory-card" onclick="openMemory('safeplace')">🤍 My Safe Place</div>
+<div class="memory-card" onclick="openMemory('us in silence')">😂 us in silence</div>
+<div class="memory-card" onclick="openMemory('jamming session ')">❤️ Thank You</div>
+</div>
+</div>
 
-  <div id="safe" class="screen">
-    <div class="dinasour">🦕</div>
-    <h2>safe space ☎️</h2>
+<div id="safeplace" class="screen">
+<h2>🤍 My Safe Place</h2>
 
-    <div class="note">
+<div class="note">
+<img src="IMG-20260621-WA0004.jpg" class="photo">
+  
+<div class="polaroid">
+    <img src="IMG-20260621-WA0004.jpg" class="photo">
+    <p class="polaroid-caption">my safe place ♡</p>
+</div>
+<p>Some people never stop being important, no matter how much time passes or how many conversations are missed.</p>
 
-        <img src="./IMG-20260621-WA0004.jpg" class="photo">
+<p>You're one of those people for me.</p>
 
-        <p>
-            Some people never stop being important,
-            no matter how much time passes or how many conversations are missed.
-        </p>
+<p>Through every laugh, every memory, every random conversation, and every little moment, you've somehow become a part of all of it.</p>
 
-        <p>
-            You're one of those people for me.
-        </p>
+<p>And whether I admit it or not, a part of me still looks for you in things I'd usually want to share.</p>
 
-        <p>
-            Through every laugh, every memory,
-            every random conversation,
-            and every little moment,
-            you've somehow become a part of all of it.
-        </p>
+<p>You're still one of my favorite people, idiot. 🤍</p>
+</div>
 
-        <p>
-            And whether I admit it or not,
-            a part of me still looks for you in things
-            I'd usually want to share.
-        </p>
+<button onclick="goHome()">Back to Museum</button>
+</div>
 
-        <p>
-            You're still one of my favorite people,
-            idiot. 🤍
-        </p>
+<div id="us in silence" class="screen">
+<h2>😂 us in silence</h2>
+  <div class="note">
+<img src="IMG-20260621-WA0004.jpg" class="photo">
+    <div class="polaroid">
+    <img src="IMG-20260621-WA0004.jpg" class="photo">
+    <p class="polaroid-caption">us in silence ♡</p>
 
-    </div>
+<div class="note">
+<p>Our meet late night tak jo meet hoti thi</p>
+<p>and fir sab chale jate the tab bhi hum rehte the maybe</p>
+<p>we started bonding more when we both use to talk gossip</p>
+<p>and use to share each and everything thankuu for being my safe place</p>
+</dib
+<button onclick="goHome()">Back to Museum</button>
+</div>
 
-    <button onclick="goHome()">Back to Museum</button>
-  </div>  <div id="funny" class="screen">
-    <div class="dinasour">🦕</div>
-    <h2>Funniest Day 😂</h2>
-    <div class="note">
-      <p>There are so many stupid moments I could put here.</p>
-      <p>The rage baiting.</p>
-      <p>The random “God’s plan.”</p>
-      <p>The way you can ruin my mood and make me laugh in the same minute.</p>
-      <p>Very annoying. Very talented. Unfortunately unforgettable.</p>
-    </div>
-    <button onclick="goHome()">Back to Museum</button>
-  </div>
+<div id="jamming session" class="screen">
+<h2>❤️ jamming session </h2>
+<div class="no'thanks'ps
+<p>For every late-ncallcall.</p>
+<p>Every reality check.</p>
+<p>Every memory.</p>
+<p>Every time you stayed.</p>
+<p>Maybe I didn't always make it feel that way, but you mattered to me.</p>
+<p>A lot.</p>
+</div>
 
-  <div id="thanks" class="screen">
-    <div class="penguin">🐧</div>
-    <h2>Thank You ❤️</h2>
-    <div class="note">
-      <p>For every late-night call.</p>
-      <p>Every reality check.</p>
-      <p>Every time you stayed when it would have been easier not to.</p>
-      <p>Maybe I didn't always make it feel that way, but you mattered to me.</p>
-      <p>A lot.</p>
-    </div>
-    <button onclick="goHome()">Back to Museum</button>
-  </div>
+<button onclick="goHome()">Back to Museum</button>
+</div>
 
 </div>
 
 <script>
-function openMemory(id) {
-  document.querySelectorAll(".screen").forEach(screen => {
-    screen.classList.remove("active");
-  });
-  document.getElementById(id).classList.add("active");
+function openMemory(id){
+document.querySelectorAll('.screen').forEach(screen=>{
+screen.classList.remove('active');
+});
+document.getElementById(id).classList.add('active');
 }
 
-function goHome() {
-  document.querySelectorAll(".screen").forEach(screen => {
-    screen.classList.remove("active");
-  });
-  document.getElementById("home").classList.add("active");
+function goHome(){
+document.querySelectorAll('.screen').forEach(screen=>{
+screen.classList.remove('active');
+});
+document.getElementById('home').classList.add('active');
 }
 
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "♡";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = (4 + Math.random() * 3) + "s";
-  document.body.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 7000);
+function createHeart(){
+const heart=document.createElement('div');
+heart.className='heart';
+heart.innerHTML=Math.random()>.5?'♡':'❤';
+heart.style.left=Math.random()*100+'vw';
+heart.style.fontSize=(16+Math.random()*18)+'px';
+heart.style.animationDuration=(5+Math.random()*4)+'s';
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),9000);
 }
 
-setInterval(createHeart, 700);
+setInterval(createHeart,500);
 </script>
 
 </body>
